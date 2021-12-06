@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider_impl/src/shop/catalogue/catalogue_controller.dart';
-import 'package:provider_impl/src/shop/item.dart';
+import 'package:shopping_cart_repository/shopping_cart_repository_core.dart';
 
 class CartController with ChangeNotifier {
   late CatalogueController _catalogueController;

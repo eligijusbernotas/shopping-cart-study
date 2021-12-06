@@ -16,6 +16,8 @@ dependencies:
     sdk: flutter
 
   provider: ^6.0.1
+  shopping_cart_repository: 
+    path: "../shopping_cart_repository"
 
 dev_dependencies:
   flutter_test:

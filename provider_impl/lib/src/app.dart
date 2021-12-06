@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:provider_impl/src/shop/cart/cart_controller.dart';
 import 'package:provider_impl/src/shop/cart/cart_view.dart';
 import 'package:provider_impl/src/shop/catalogue/catalogue_controller.dart';
-import 'package:provider_impl/src/shop/catalogue/catalogue_service.dart';
+import 'package:provider_impl/src/shop/catalogue/dummy_catalogue_service.dart';
 import 'package:provider_impl/src/shop/catalogue/catalogue_view.dart';
 
 /// The Widget that configures your application.
@@ -16,13 +16,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(create: (context) => CatalogueController(CatalogueService())),
+        ChangeNotifierProvider(create: (context) => CatalogueController(const DummyCatalogueService())),
         ChangeNotifierProxyProvider<CatalogueController, CartController>(
           create: (context) => CartController(),
           update: (context, catalogueController, cartController) {
             if (cartController == null) throw ArgumentError.notNull('cartController');
             cartController.catalogueController = catalogueController;
-            catalogueController.loadItems();
             return cartController;
           },
         )

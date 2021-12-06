@@ -1,26 +1,27 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_impl/src/shop/cart/cart_controller.dart';
 import 'package:provider_impl/src/shop/catalogue/catalogue_controller.dart';
-import 'package:provider_impl/src/shop/item.dart';
+import 'package:shopping_cart_repository/shopping_cart_repository_core.dart';
 
 class CatalogueItemListView extends StatelessWidget {
   const CatalogueItemListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final catalogueController = context.watch<CatalogueController>();
+    final catalogueItems = context.select<CatalogueController, List<Item>>((catalogue) => catalogue.catalogueItems);
 
-    return ListView.builder(
-      itemCount: catalogueController.catalogueItems.length,
-      itemBuilder: (context, index) {
-        final item = catalogueController.catalogueItems[index];
-        return _ListItem(
-          item: item,
-        );
-      },
+    return RefreshIndicator(
+      onRefresh: () => Provider.of<CatalogueController>(context, listen: false).loadItems(),
+      child: ListView.builder(
+        itemCount: catalogueItems.length,
+        itemBuilder: (context, index) {
+          final item = catalogueItems[index];
+          return _ListItem(
+            item: item,
+          );
+        },
+      ),
     );
   }
 }

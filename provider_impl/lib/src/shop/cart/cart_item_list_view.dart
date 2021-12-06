@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_impl/src/shop/cart/cart_controller.dart';
-import 'package:provider_impl/src/shop/item.dart';
+import 'package:shopping_cart_repository/shopping_cart_repository_core.dart';
 
 class CartItemListView extends StatelessWidget {
   const CartItemListView({Key? key}) : super(key: key);
@@ -29,14 +29,12 @@ class _CartListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartController = context.read<CartController>();
-
     return ListTile(
       title: Text(item.name),
       trailing: IconButton(
         color: Colors.red.shade500,
         icon: const Icon(Icons.remove),
-        onPressed: () => cartController.remove(item),
+        onPressed: () => context.read<CartController>().remove(item),
       ),
     );
   }
