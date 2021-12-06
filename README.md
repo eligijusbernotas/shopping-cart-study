@@ -1,2 +1,2 @@
 # shopping-cart-study
-A study of different architectures to be used in a Flutter application
+A study of different architectures to be used in a Flutter application and their different testing aproaches.
