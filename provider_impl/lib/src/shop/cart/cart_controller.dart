@@ -3,9 +3,8 @@ import 'package:provider_impl/src/shop/catalogue/catalogue_controller.dart';
 import 'package:shopping_cart_repository/shopping_cart_repository_core.dart';
 
 class CartController with ChangeNotifier {
-  late CatalogueController _catalogueController;
-
   final List<int> _itemIds = [];
+  late CatalogueController _catalogueController;
 
   set catalogueController(CatalogueController controller) {
     _catalogueController = controller;
